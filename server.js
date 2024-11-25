@@ -22,9 +22,11 @@ app.use(express.json()); //this allow to parse data like a parser
 app.use(express.urlencoded({ extended: false })); //parses the HTML to extract json{key:value}
 
 
-// Routes 
+// Auth Routes 
 app.use('/api/auth', require('./routes/authRoutes'));
 
+//Complaint Routes
+app.use('/api/complaints', require('./routes/complaintRoutes'));
 
 //errorHandler middleware
 app.use(errorHandler)
