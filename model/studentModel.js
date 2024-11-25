@@ -7,7 +7,7 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        trim: true,
+        trim: true,//removes whitespace
     },
     password: {
         type: String,
