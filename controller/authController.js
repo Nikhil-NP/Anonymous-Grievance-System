@@ -1,6 +1,6 @@
 const Student = require('../model/studentModel');
 const Email = require('../model/emailModel');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 
@@ -53,6 +53,8 @@ const registerStudent = asyncHandler( async (req, res) => {
             role: user.role,
             token: generateToken(user._id)
         });
+
+        console.log(user);
     } else {
         res.status(400);
         throw new Error('Invalid user data or mail ');
@@ -69,12 +71,14 @@ const loginStudent =  asyncHandler(async (req, res) => {
 
     //since we cant validate via mail we need to do via username
     if (user && (await bcrypt.compare(password, user.password))) {
+        res.status(200);
         res.json({
             _id: user.id,
             name: user.username,
             role: user.role,
             token: generateToken(user._id)
         });
+        console.log("student login success: ",user);
     } else {
         res.status(401);
         throw new Error('Invalid credentials');

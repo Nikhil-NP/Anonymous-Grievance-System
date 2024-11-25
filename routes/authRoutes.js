@@ -3,6 +3,7 @@ const express = require('express');
 //creating a router using inbuild express method
 const router = express.Router();
 
+//importing the controller
 const {registerStudent,loginStudent} = require("../controller/authController");
 
 
