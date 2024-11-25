@@ -3,6 +3,7 @@ const Email = require('../model/emailModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
+const Faculty = require('../model/facultyModel');
 
 
 // @desc    Register student
@@ -61,6 +62,7 @@ const registerStudent = asyncHandler( async (req, res) => {
     }
 });
 
+
 // @desc    Login user
 // @route   POST /api/auth/login
 // @access  Public
@@ -87,11 +89,112 @@ const loginStudent =  asyncHandler(async (req, res) => {
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '15m',
+        expiresIn: '30m',
     });
 };
 
+
+
+
+
+
+
+
+// @desc    Register Faculty
+// @route   POST /api/auth/fregister
+// @access  Public
+const registerFaculty = asyncHandler( async (req, res) => {
+    const { username, password } = req.body;
+
+
+    // Validate input
+    if (!username || !password ) {
+        res.status(400);
+        throw new Error('All fields are required while regisetering as faculty ');
+    }
+
+
+    // Check if user exists : we do to this in the  faculty  clustor to check if unique username is there are not
+    const userExists = await Faculty.findOne({ username });
+    if (userExists) {
+        res.status(400);
+        throw new Error('faculty  already exists');
+    }
+
+    // Hash password salt for no of itterations to ensure delay it helps to crack slowly
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+
+
+    // Creating FacultyAonymousId with email stored seperately
+    const user = await Faculty.create({
+        username,
+        password: hashedPassword
+    });
+
+
+
+    //sending the result for confirmation
+    if (user ) {
+        res.status(201).json({
+            _id: user.id,
+            name: user.username,
+            role: user.role,
+            token: generateToken(user._id)
+        });
+
+        console.log(user);
+    } else {
+        res.status(400);
+        throw new Error('Invalid user data or mail ');
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+// @desc    Login faculty
+// @route   POST /api/auth/flogin
+// @access  Public
+const loginFaculty =  asyncHandler(async (req, res) => {
+    const { username, password } = req.body;
+
+    const user = await Faculty.findOne({ username });
+
+    //since we cant validate via mail we need to do via username
+    if (user && (await bcrypt.compare(password, user.password))) {
+        res.status(200);
+        res.json({
+            _id: user.id,
+            name: user.username,
+            role: user.role,
+            token: generateToken(user._id)
+        });
+        console.log("faculty login success: ",user);
+    } else {
+        res.status(401);
+        throw new Error('Invalid credentials for faculty');
+    }
+});
+
+
+
+
+
+
+
 module.exports = {
     registerStudent,
-    loginStudent
+    loginStudent,
+    loginFaculty,
+    registerFaculty
 };
