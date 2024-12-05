@@ -14,10 +14,10 @@ const protect = asyncHandler(async (req, res, next) => {
         req.headers.authorization.startsWith('Bearer')
     ) {
         try {
-            //getting only the token 
+            //getting only the vaid jwt token 
             token = req.headers.authorization.split(' ')[1];
             const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-            //we are excluding the password even in authentication part 
+            //we are excluding the password even in authentication part and sending the other details
             req.user = await Student.findById(decoded.id).select('-password') || await Faculty.findById(decoded.id).select('-password');
             console.log(req.user);
             next();
