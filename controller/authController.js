@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const Faculty = require('../model/facultyModel');
-
+//const bodyParser = require('body-parser');
 
 // @desc    Register student
 // @route   POST /api/auth/register
@@ -20,12 +20,31 @@ const registerStudent = asyncHandler( async (req, res) => {
     }
 
 
-    // Check if user exists : we do to this in the  emial clustor to check if mail is there are not
+    // Check if user mail  exists : we do to this in the  emial clustor to check if mail is there are not
     const userExists = await Email.findOne({ email });
     if (userExists) {
         res.status(400);
         throw new Error('User mail  already exists');
     }
+
+    //check if username already exist in db:
+    const userName = await Student.findOne({ username });
+    if (userName) {
+        res.status(400);
+        throw new Error('User with this name  already exists');
+    }
+
+
+
+    //regex email validator to ensure the mail is in valid format
+    //my mail for example : NikhilKumarPurohit.2022CMCIM400@atmemys.onmicrosoft.com  (fake)
+    const regex = /^[A-Za-z]+\.[0-9]{4}[A-Za-z0-9]+@atmemys\.onmicrosoft\.com$/;
+    if (!regex.test(email)){
+        res.status(400)
+        throw new Error('invalid student mail format');
+    }
+
+
 
     // Hash password salt for no of itterations to ensure delay it helps to crack slowly
     const salt = await bcrypt.genSalt(10);
@@ -87,6 +106,8 @@ const loginStudent =  asyncHandler(async (req, res) => {
     }
 });
 
+
+//jwt contians the users id , the  jwt secret key password and expiry time
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: '30m',
