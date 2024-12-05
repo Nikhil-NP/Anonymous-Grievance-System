@@ -15,8 +15,5 @@ router.post('/login',loginStudent);
 router.post('/fregister',registerFaculty);
 router.post('/flogin',loginFaculty);
 
-
+//here after login/register we generate a jwt that we will use to verify by authmiddleware to do acces  compalintRoutes.js
 module.exports = router;
-
-
-
