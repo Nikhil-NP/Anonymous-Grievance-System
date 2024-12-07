@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Complaints = require('../model/complaintsModel');
+const {validateResponse} = require('../services/geminiService')
 
 
 // @desc    create a complaint student
@@ -18,16 +19,33 @@ const createComplaint = asyncHandler(async (req, res) => {
         throw new Error('All fields are required');
     }
 
-    const complaint = await Complaints.create({
-        
-        title,
-        description,
-        to: facultyId,
-        by: req.user.id
-        //status: 'Pending',this is actully extra just kept it casue i have some tests in mind
-    });
+    try {
+        // Wait for the response from validateResponse
+        const complain = `tite : ${title} , description :  ${description}`;
+        const geminiResult = await validateResponse(complain);
 
-    res.status(201).json(complaint);
+        console.log("-----------------------------------", geminiResult);  // Now geminiResult will be true or false
+
+        if (geminiResult === false) {
+            res.status(400).json({ message: 'This is an NSFW complaint, rejected' });;
+            //throw new Error('This is an NSFW complaint, rejected');
+        } else {
+            console.log("The complaint is safe for work, can be sent to the teacher");
+
+            // Proceed with complaint creation if it's safe
+            const complaint = await Complaints.create({
+                title,
+                description,
+                to: facultyId,
+                by: req.user.id
+            });
+
+            res.status(201).json(complaint);
+        }
+    } catch (error) {
+        console.error('Error is:', error);
+        res.status(500).json({ message: error.message });
+    }
 });
 
 // @desc    view/read  complaint/s as a student
