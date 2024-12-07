@@ -90,4 +90,108 @@ const getAssignedComplaints = asyncHandler(async (req, res) => {
 });
 
 
-module.exports = { createComplaint, getAssignedComplaints,readComplaints };
+
+// @desc    student getting list of  complaints that are not solved yet
+// @route   GET /api/complaint/pending
+// @access  Private
+const getPendingComplaints = asyncHandler(async (req, res) => {
+    if (req.user.role !== 'student') {
+        res.status(403);
+        throw new Error('Access denied not a student/admin');
+    }
+                                                            //the populate make the clusotr readble ensuring that we have nested info aabout sender insted of objectid
+    const complaints = await Complaints.find({
+             by: req.user.id,
+             status: 'pending'
+         })
+        .populate('to','username')
+        .select('-password');
+    res.status(200).json(complaints);
+});
+
+
+//@desc faculty chose to reply and change status
+//@route PUT /api/complaint/pending/:id
+//@acces Private
+const addressPendingComplaints = asyncHandler(async(req,res) => {
+
+    const {status, reply} = req.body;
+    const {id} = req.params;
+
+    if(req.user.role !== 'faculty'){
+        res.status(403);
+        throw new Error('Acess denied you need to be a faculty/admin');
+    }
+
+    
+    if (!reply || !status ) {
+        res.status(400);
+        throw new Error('reply and status both fields are required');
+    }
+    
+    const compliantUpdated = await Complaints.findByIdAndUpdate(
+        {_id :id },
+        { $set: { status,reply } },
+        { new: true }
+    );
+    if (!compliantUpdated) {
+        res.status(404);
+        throw new Error('couldnt update the complaint status or put a reply to it');
+    }
+    res.status(200).json(compliantUpdated);
+    console.log(compliantUpdated);
+
+
+});
+
+
+
+
+// @desc    student getting list of  complaints that are  solved 
+// @route   GET /api/complaint/resolved
+// @access  Private
+const getResolvedComplaints = asyncHandler(async (req, res) => {
+    if (req.user.role !== 'student') {
+        res.status(403);
+        throw new Error('Access denied not a student/admin');
+    }
+                                                            //the populate make the clusotr readble ensuring that we have nested info aabout sender insted of objectid
+    const complaints = await Complaints.find({
+             by: req.user.id,
+             status: 'resolved'
+         })
+        .populate('to','username')
+        .select('-password');
+    res.status(200).json(complaints);
+});
+
+
+// @desc    student getting list of  complaints that are  rejected 
+// @route   GET /api/complaint/resolved
+// @access  Private
+const getRejectedComplaints = asyncHandler(async (req, res) => {
+    if (req.user.role !== 'student') {
+        res.status(403);
+        throw new Error('Access denied not a student/admin');
+    }
+                                                            //the populate make the clusotr readble ensuring that we have nested info aabout sender insted of objectid
+    const complaints = await Complaints.find({
+             by: req.user.id,
+             status: 'rejected'
+         })
+        .populate('to','username')
+        .select('-password');
+    res.status(200).json(complaints);
+});
+
+
+
+
+
+module.exports = {  createComplaint, 
+                    getAssignedComplaints,
+                    readComplaints,
+                    getPendingComplaints,
+                    addressPendingComplaints,
+                    getResolvedComplaints,
+                    getRejectedComplaints };
