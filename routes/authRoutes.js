@@ -4,11 +4,13 @@ const express = require('express');
 const router = express.Router();
 
 //importing the controller
-const {registerStudent,loginStudent,loginFaculty,registerFaculty} = require("../controller/authController");
+const {registerStudent,loginStudent,loginFaculty,registerFaculty,verifyStudentOTP} = require("../controller/authController");
 
 
 //the gateway routes for student
-router.post('/register',registerStudent);
+router.post('/register',registerStudent);//otp generation and data saved in tempory memeory
+//verification before registration
+router.post('/verify', verifyStudentOTP); // Verify OTP and complete registration
 router.post('/login',loginStudent);
 
 //gateway route for faculty
