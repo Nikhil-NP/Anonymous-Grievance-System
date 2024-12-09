@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const Faculty = require('../model/facultyModel');
 const nodemailer = require('nodemailer');
-//const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser'); declared in server.js not needed here just for reference and other feather i will in future
 
 
 
