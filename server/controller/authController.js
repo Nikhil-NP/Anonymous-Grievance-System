@@ -63,16 +63,15 @@ const registerStudent = asyncHandler( async (req, res) => {
     }
 
 
-
     // Hash password salt for no of itterations to ensure delay it helps to crack slowly
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
 
+    
     //otp generation 
     const otp = Math.floor(100000 + Math.random() * 900000);
     pendingRegistrations.set(email, { username, hashedPassword, otp, createdAt: Date.now() });
-
 
     //mail config
     const mailOptions = {

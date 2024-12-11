@@ -2,8 +2,10 @@
 const express = require("express");
 const dotenv = require("dotenv").config();//this needs to be at the top cause .env all are dependent on it
 
+
 const connectDb = require("./config/dbConnection");
 const {errorHandler} = require("./middleware/errorHandler");
+const cors = require('cors');
 
 
 //.env path setup
@@ -25,6 +27,7 @@ app.use(express.urlencoded({ extended: false })); //parses the HTML to extract j
 //body parser for email format verifier
 const bodyParser = require('body-parser');
 app.use(bodyParser.json())
+app.use(cors());
 
 
 
@@ -33,6 +36,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 
 //Complaint Routes
 app.use('/api/complaints', require('./routes/complaintRoutes'));
+
 
 //errorHandler middleware
 app.use(errorHandler)
