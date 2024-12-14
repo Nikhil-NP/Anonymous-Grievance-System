@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const Complaints = require('../model/complaintsModel');
 const {validateResponse} = require('../services/geminiService')
-
+const Faculty = require('../model/facultyModel');
 
 // @desc    create a complaint student
 // @route   POST /api/complaint
@@ -30,7 +30,7 @@ const createComplaint = asyncHandler(async (req, res) => {
             res.status(400).json({ message: 'This is an NSFW complaint, rejected' });;
             //throw new Error('This is an NSFW complaint, rejected');
         } else {
-            console.log("The complaint is safe for work, can be sent to the teacher");
+            console.log("The complaint is safe for work, can be sent to the faculty");
 
             // Proceed with complaint creation if it's safe
             const complaint = await Complaints.create({
@@ -185,6 +185,35 @@ const getRejectedComplaints = asyncHandler(async (req, res) => {
 });
 
 
+// Assuming you're using Express.js
+const getComplaintById = asyncHandler(async (req, res) => {
+   
+      const complaint = await Complaints.findById(req.params.id);
+      if (!complaint) {
+        res.status(403);
+        throw new Error('Access denied not a student/admin');
+      }
+      res.status(200).json(complaint);
+   
+    
+  });
+  
+// @desc Get all faculty members
+// @route GET /api/faculty
+// @access Private (Optional, based on role)
+const getAllFaculty = asyncHandler(async (req, res) => {
+    // If you want to restrict to certain roles, add checks
+    if (req.user.role !== 'student') {
+        res.status(403);
+        throw new Error('Access denied only student can see .');
+    }
+
+    // Fetch all faculty members (return only necessary fields)
+    const facultyMembers = await Faculty.find({}, 'id username'); // Fetch `id` and `username` only
+
+    // Respond with the list
+    res.status(200).json(facultyMembers);
+});
 
 
 
@@ -194,4 +223,6 @@ module.exports = {  createComplaint,
                     getPendingComplaints,
                     addressPendingComplaints,
                     getResolvedComplaints,
-                    getRejectedComplaints };
+                    getRejectedComplaints,
+                    getComplaintById,
+                    getAllFaculty };
