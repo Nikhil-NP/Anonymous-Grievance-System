@@ -1,36 +1,38 @@
 import React from 'react';
-import { Link ,useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import './FacultyDashboard.css'; // Import the CSS file for styling
 
-const Dashboard = () => {
-    const navigate = useNavigate();
-  
-    const handleLogout = () => {
-      // Clear the token from localStorage
-      localStorage.removeItem('token');
-  
-      // Redirect the user to the homepage
-      navigate('/');
-    };
+const FacultyDashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear the token from localStorage
+    localStorage.removeItem('token');
+
+    // Redirect the user to the homepage
+    navigate('/');
+  };
+
   return (
-  <div>
-    <h1>Faculty  Dashboard</h1>
-    <nav>
-      <ul>
-        <li>
-          <Link to="/history">View your  Complaints history </Link>
-        </li>
-        <li>
-          <Link to="/pending">View pending Complaints</Link>
-        </li>
-        <li>
-            {/* this triggers logout function on click */}
-            <button onClick={handleLogout} style={{ background: 'none', border: 'none', color: 'blue', cursor: 'pointer' }}>
-              Logout
-            </button>
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <h1>Faculty Dashboard</h1>
+      </header>
+      <nav className="dashboard-nav">
+        <ul className="nav-list">
+          <li>
+            <Link to="/history" className="nav-link">View Complaints History</Link>
           </li>
-      </ul>
-    </nav>
-  </div>
-)};
+          <li>
+            <Link to="/pending" className="nav-link">View Pending Complaints</Link>
+          </li>
+          <li>
+            <button onClick={handleLogout} className="logout-button">Logout</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
+};
 
-export default Dashboard;
+export default FacultyDashboard;

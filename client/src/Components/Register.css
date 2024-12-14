@@ -1,0 +1,68 @@
+/* Container for the entire registration page */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full-screen height */
+  background-color: white; /* Royal blue background */
+  font-family: 'Roboto', sans-serif; /* Clean modern font */
+}
+
+/* Card container for the register form */
+.register-card {
+  background-color: #ffffff; /* White background for contrast */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  width: 100%;
+  max-width: 400px; /* Limit width for small devices */
+  text-align: center;
+}
+
+/* Heading styling */
+.register-card h2 {
+  margin-bottom: 20px;
+  color: #0571e4; /* Royal blue text */
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+/* Input fields styling */
+.register-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Change border color on focus */
+.register-input:focus {
+  border-color: #0571e4; /* Highlight royal blue */
+  outline: none;
+}
+
+/* Register button styling */
+.register-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0571e4; /* Royal blue background */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for button */
+.register-button:hover {
+  background-color: #005bb5; /* Darker blue */
+}

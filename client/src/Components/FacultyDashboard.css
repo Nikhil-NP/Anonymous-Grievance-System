@@ -1,0 +1,77 @@
+/* Overall container styling */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white; /* Royal blue background */
+    min-height: 80vh;
+    padding: 20px;
+    color: white; /* White text */
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Header styling */
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  /* Navigation menu styling */
+  .dashboard-nav {
+    width: 100%;
+    max-width: 500px;
+    background-color: white; /* White background for the nav card */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  }
+  
+  .nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-list li {
+    margin-bottom: 15px;
+  }
+  
+  .nav-list li:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Link styling */
+  .nav-link {
+    text-decoration: none;
+    color: #0571e4; /* Royal blue */
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #005bb5; /* Darker blue on hover */
+  }
+  
+  /* Logout button styling */
+  .logout-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0571e4; /* Royal blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #005bb5; /* Darker blue */
+  }
+  

@@ -20,6 +20,27 @@ export const fetchComplaints = (type, token) => API.get(`/complaints/${type}`, {
   headers: { Authorization: `Bearer ${token}` },
 });
 
-export const updateComplaint = (id, data, token) => API.put(`/complaints/pending/${id}`, data, {
+
+export const fetchComplaintById = (id, token) => API.get(`/complaints/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
+
+export const updateComplaint = (id, data, token) => {
+    
+    return API.put(`/complaints/pending/${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => {
+        console.log("Response from backend:", response.data);
+        return response;
+      })
+      .catch((error) => {
+        console.error("Error in updateComplaint API call:", error.response?.data || error.message);
+        throw error;
+      });
+  };
+  
+  export const fetchAllFaculty = (token) =>
+    API.get('/complaints/facultyId', {
+      headers: { Authorization: `Bearer ${token}` },
+    });

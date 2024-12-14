@@ -1,75 +1,86 @@
 import React, { useState } from 'react';
 import { registerStudent } from '../services/api';
-import { Link } from 'react-router-dom'; //not using planning to use the below useNavigate
 import { useNavigate } from 'react-router-dom';
-
+import './Register.css';
 
 const Register = () => {
-  const [formData, setFormData] = useState({ username: '', email: '',password: '' });
-  const [otpSent, setOtpSent] = useState(false);
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ username: '', email: '', password: '' });
+  const [error, setError] = useState(''); // To handle error messages
+  const [otpSent, setOtpSent] = useState(false); // OTP sent state
+  const navigate = useNavigate(); // To navigate programmatically
+
   const handleSubmit = async (e) => {
-    // Frontend validation to reduce server 
+    e.preventDefault(); // Prevent default form submission behavior
+
+    // Frontend validation
     if (!formData.username || !formData.email || !formData.password) {
-      alert('All fields are required');
+      setError('All fields are required');
       return;
     }
 
     const regex = /^[A-Za-z]+\.[0-9]{4}[A-Za-z0-9]+@atmemys\.onmicrosoft\.com$/;
     if (!regex.test(formData.email)) {
-      alert('Invalid student email format');
+      setError('Invalid student email format');
       return;
     }
-      e.preventDefault();
-      try {
-        await registerStudent(formData);
-        setOtpSent(true);
-        alert('OTP sent to your email/outlook!');
-         // Redirect to `/verify` with email as query parameter
-        navigate(`/verify?email=${encodeURIComponent(formData.email)}`);
-        } catch (err) {
-          if (err.response) {
-            // Log the full response for debugging
-            console.error('Error Response:', err.response.data);
-      
-            // Display the error message returned by the backend
-            alert(err.response.data.message || 'An error occurred.');
-          }
-          else {
-            // For other errors (like network issues)
-            console.error('Error:', err.message);
-            alert('An unexpected error occurred. Please try again.');
-          }
-        };
+
+    try {
+      // Call the register API
+      await registerStudent(formData);
+      setOtpSent(true); // Set OTP sent flag
+      alert('OTP sent to your email/outlook!');
+      navigate(`/verify?email=${encodeURIComponent(formData.email)}`); // Redirect to verification page
+    } catch (err) {
+      if (err.response) {
+        setError(err.response.data.message || 'An error occurred.');
+      } else {
+        setError('An unexpected error occurred. Please try again.');
+      }
+    }
+  };
 
   if (otpSent) {
     return (
-        <Link to="/verify">Verify with OTP</Link>);
+      <div className="register-container">
+        <div className="register-card">
+          <h2>Verification</h2>
+          <p>OTP has been sent to your email. Please verify!</p>
+        </div>
+      </div>
+    );
   }
-}
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Username"
-        value={formData.username}
-        onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={formData.password}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-      />
-      <button type="submit">Register</button>
-    </form>
+    <div className="register-container">
+      <div className="register-card">
+        <h2>Register</h2>
+        {error && <p className="error-message">{error}</p>} {/* Show error if any */}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Username"
+            value={formData.username}
+            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+            className="register-input"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="register-input"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            className="register-input"
+          />
+          <button type="submit" className="register-button">Register</button>
+        </form>
+      </div>
+    </div>
   );
 };
 

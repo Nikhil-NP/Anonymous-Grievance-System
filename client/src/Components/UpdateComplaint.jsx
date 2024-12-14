@@ -1,24 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'; 
-import { fetchComplaints,updateComplaint } from '../services/api'; // Import the API call function
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchComplaintById, updateComplaint } from "../services/api";
+import './UpdateComplaint.css';
+
 
 const UpdateComplaint = () => {
-  const { id: _id } = useParams(); // Get complaint ID from the URL
+  const { id: _id } = useParams();
   const [complaint, setComplaint] = useState(null);
-  const [status, setStatus] = useState('');
-  const [reply, setReply] = useState('');
-  const [error, setError] = useState('');
+  const [status, setStatus] = useState("");
+  const [reply, setReply] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const token = localStorage.getItem('token'); // Get token from localStorage
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchComplaint = async () => {
       try {
-        const response = await fetchComplaints('pending', token); // Fetch complaints
-        const complaintData = response.data.find((complaint) => complaint.id === parseInt(_id));
-        setComplaint(complaintData); // Set fetched complaint data
+        const response = await fetchComplaintById(_id, token);
+        const complaintData = response.data;
+        setComplaint(complaintData);
+        setStatus(complaintData.status);
+        setReply(complaintData.reply || "");
+        setLoading(false);
       } catch (err) {
-        setError('Error fetching complaint.');
+        setError("Error fetching complaint. Please try again.");
+        setLoading(false);
       }
     };
     fetchComplaint();
@@ -28,43 +35,58 @@ const UpdateComplaint = () => {
     e.preventDefault();
 
     if (!status || !reply) {
-      setError('Both status and reply are required.');
+      setError("Both status and reply are required.");
       return;
     }
 
     try {
       const updatedData = { status, reply };
-      await updateComplaint(_id, updatedData, token); // Update the complaint
-      navigate('/unsolved'); // Navigate back to pending complaints page
+      await updateComplaint(_id, updatedData, token);
+      navigate("/pending");
     } catch (err) {
-      setError('Failed to update complaint. Please try again.');
+      setError("Failed to update complaint. Please try again.");
     }
   };
 
-  if (!complaint) return <p>Loading complaint...</p>;
+  if (loading) return <p>Loading complaint...</p>;
+  if (error) return <p className="error">{error}</p>;
 
   return (
-    <div>
+    <div className="update-complaint-wrapper">
       <h2>Update Complaint</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleUpdate}>
-        <div>
+      {error && <p className="error">{error}</p>}
+
+      {complaint && (
+        <div className="complaint-details">
+          <p><strong>Title:</strong> {complaint.title}</p>
+          <p><strong>Description:</strong> {complaint.description}</p>
+          <p><strong>Date:</strong> {new Date(complaint.date).toLocaleDateString()}</p>
+          <p><strong>Current Status:</strong> {complaint.status}</p>
+          <p><strong>Reply:</strong> {complaint.reply || "No reply yet"}</p>
+        </div>
+      )}
+
+      <form onSubmit={handleUpdate} className="update-form">
+        <div className="form-group">
           <label>Status</label>
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <select value={status} onChange={(e) => setStatus(e.target.value)} className="form-select">
             <option value="pending">Pending</option>
             <option value="resolved">Resolved</option>
             <option value="rejected">Rejected</option>
           </select>
         </div>
-        <div>
+
+        <div className="form-group">
           <label>Reply</label>
           <textarea
             value={reply}
             onChange={(e) => setReply(e.target.value)}
             placeholder="Enter reply to the complaint"
+            className="form-textarea"
           />
         </div>
-        <button type="submit">Update Complaint</button>
+
+        <button type="submit" className="submit-button">Update Complaint</button>
       </form>
     </div>
   );

@@ -1,0 +1,88 @@
+/* General styling for the page */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9; /* Light gray background */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .unsolved-complaints-wrapper {
+    padding: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff; /* White background for content */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  /* Back to Dashboard link styling */
+  .back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #005bb5; /* Blue color for link */
+    font-size: 1.2rem;
+  }
+  
+  .back-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Heading styles */
+  h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Container for complaints */
+  .complaints-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Individual complaint card */
+  .complaint-card {
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for each complaint */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #005bb5; /* Blue left border to highlight each card */
+  }
+  
+  /* Complaint title styling */
+  .complaint-title {
+    font-size: 1.5rem;
+    color: #005bb5; /* Blue color for titles */
+    margin-bottom: 10px;
+  }
+  
+  /* Complaint description styling */
+  .complaint-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  /* Text styling for other complaint details */
+  p {
+    font-size: 1rem;
+    color: #333;
+    margin: 5px 0;
+  }
+  
+  strong {
+    color: #005bb5; /* Bold and blue for labels */
+  }
+  
+  /* No complaints message */
+  .no-complaints {
+    font-size: 1.2rem;
+    color: #888;
+  }
+
+  .red{
+    color: red;
+  }

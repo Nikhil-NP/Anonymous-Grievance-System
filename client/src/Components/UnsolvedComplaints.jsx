@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchComplaints } from '../services/api'; // Import the API call function
+import { Link } from 'react-router-dom';
+import './UnsolvedComplaints.css'; // Import the custom CSS styles
 
 const UnsolvedComplaints = () => {
   const [complaints, setComplaints] = useState([]);
@@ -18,17 +20,35 @@ const UnsolvedComplaints = () => {
     fetchData();
   }, [token]);
 
+  // Function to format date to a readable format
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
   return (
-    <div>
+    <div className="unsolved-complaints-wrapper">
+      <Link to="/dashboard" className="back-link">Back to Dashboard</Link>
+
       <h2>Unsolved Complaints</h2>
       {complaints.length > 0 ? (
-        <ul>
+        <div className="complaints-container">
           {complaints.map((complaint) => (
-            <li key={complaint.id}>{complaint.description}</li>
+            <div key={complaint.id} className="complaint-card">
+              <h4 className="complaint-title">{complaint.title}</h4>
+              <p className="complaint-description">{complaint.description}</p>
+              <p className='red'><strong>Status:</strong> {complaint.status}</p>
+              <p><strong>Reply:</strong> {complaint.reply}</p>
+              <p><strong>Date:</strong> {formatDate(complaint.createdAt)}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
-        <p>No unsolved complaints available.</p>
+        <p className="no-complaints">No unsolved complaints available.</p>
       )}
     </div>
   );

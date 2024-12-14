@@ -1,0 +1,111 @@
+/* General body styling */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #0571e4; /* Blue background */
+  color: white; /* White text color for readability */
+}
+
+/* Wrapper for the entire form page */
+.create-complaint-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  text-align: left;
+
+}
+
+/* Header styling */
+.create-complaint-header {
+  background-color: #005bb5; /* Darker blue for the header */
+  color: white;
+  padding: 15px;
+  width: 62%; /* Ensure the header takes up the full width */
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+}
+
+.create-complaint-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+/* Success and Error messages */
+.success-message {
+  color: #4caf50; /* Green color for success */
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: #f44336; /* Red color for error */
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+/* Form styling */
+.complaint-form {
+  width: 100%;
+  max-width: 900px; /* Restricting the form width */
+  background-color: #ffffff; /* White background for the form */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  margin-top: 20px;
+}
+
+.form-section {
+  display: flex;
+  justify-content: space-between; /* Space out the form fields */
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1; /* Make each form group take equal space */
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+}
+
+.input-field,
+.textarea-field,
+.select-field {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-field:focus,
+.textarea-field:focus,
+.select-field:focus {
+  border-color: #005bb5; /* Blue border on focus */
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #005bb5; /* Dark blue for the button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #003f87; /* Darker blue on hover */
+}
+
+h2{
+  color: white;
+}

@@ -1,12 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './LandingPage.css';
 
 const LandingPage = () => (
-  <div>
-    <h1>Welcome to the Complaint Portal</h1>
-    <p>
-      <Link to="/login">Login</Link> | <Link to="/register">Register</Link> | <Link to="/flogin">faculty login</Link>
-    </p>
+  <div className="landing-container">
+    <div className="content">
+      <h1>Welcome to the Anonymous Grievance Portal</h1>
+      <p className="description">Securely submit and manage grievances with ease.</p>
+      <div className="links">
+        <Link to="/login" className="landing-link">Login</Link>
+        <Link to="/register" className="landing-link">Register</Link>
+        <Link to="/flogin" className="landing-link">Faculty Login</Link>
+      </div>
+    </div>
   </div>
 );
 

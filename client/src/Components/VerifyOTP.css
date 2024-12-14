@@ -1,0 +1,62 @@
+/* Container for the entire verify OTP page */
+.verify-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Card container for the verify OTP form */
+  .verify-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Heading styling */
+  .verify-card h2 {
+    margin-bottom: 20px;
+    color: #0571e4; /* Royal blue text */
+  }
+  
+  /* Input fields styling */
+  .verify-input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Change border color on focus */
+  .verify-input:focus {
+    border-color: #0571e4;
+    outline: none;
+  }
+  
+  /* Verify button styling */
+  .verify-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0571e4;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for button */
+  .verify-button:hover {
+    background-color: #005bb5;
+  }
+  

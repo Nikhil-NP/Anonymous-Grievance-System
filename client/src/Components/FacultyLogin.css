@@ -1,0 +1,69 @@
+/* Container for the entire login page */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full-screen height */
+    background-color: white; /* Royal blue background */
+    font-family: 'Roboto', sans-serif; /* Clean modern font */
+  }
+  
+  /* Card container for the login form */
+  .login-card {
+    background-color: #ffffff; /* White background for contrast */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    width: 100%;
+    max-width: 400px; /* Limit width for small devices */
+    text-align: center;
+  }
+  
+  /* Heading styling */
+  .login-card h2 {
+    margin-bottom: 20px;
+    color: #0571e4; /* Royal blue text */
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Input fields styling */
+  .login-input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Change border color on focus */
+  .login-input:focus {
+    border-color: #0571e4; /* Highlight royal blue */
+    outline: none;
+  }
+  
+  /* Login button styling */
+  .login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0571e4; /* Royal blue background */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for button */
+  .login-button:hover {
+    background-color: #005bb5; /* Darker blue */
+  }
+  

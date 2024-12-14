@@ -1,0 +1,53 @@
+/* Layout.css ,header.css footer.css */
+
+
+/* Layout.css */
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9f9f9; /* White background */
+    color: #333; /* Neutral text color */
+    text-align: center;
+  }
+  
+  .layout-content {
+    flex: 1;
+    padding: 20px;
+  }
+
+  /* Header.css */
+.header {
+    background-color: #0571e4; /* Blue background */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  .header nav a:hover {
+    text-decoration: underline;
+  }
+  
+
+  /* Footer.css */
+.footer {
+    background-color: #0571e4; /* Blue background */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+  }
+  
