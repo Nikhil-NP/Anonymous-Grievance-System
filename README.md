@@ -107,5 +107,3 @@ Contributions are welcome! To contribute:
   - Shivanaga: [GitHub Profile]
   - Veeresh: [GitHub Profile]
 
-## License
-This project is open source and available under the [MIT License](LICENSE).
