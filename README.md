@@ -107,3 +107,9 @@ Contributions are welcome! To contribute:
   - Shivanaga: [GitHub Profile]
   - Veeresh: [GitHub Profile]
 
+## Acknowledgments
+
+- Special thanks to the MongoDB Atlas team for their excellent database service
+- Node.js and React.js communities for their extensive documentation
+- Google Cloud Platform for their API services
+- All contributors who helped test and improve this system
