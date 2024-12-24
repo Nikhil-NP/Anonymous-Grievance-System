@@ -3,6 +3,9 @@
 ## Overview
 The Anonymous Grievance System is a web application designed to facilitate confidential communication between students and faculty for grievance resolution. The system ensures that only verified college students can register while maintaining strict anonymity. It implements content moderation to maintain a professional environment and features a comprehensive architecture including frontend, backend, and database components.this was build as our project idea for Mini-project.
 
+## Demo
+https://youtu.be/xXOHnJW8uvg
+
 ## Key Features
 - Secure anonymous authentication for students and faculty
 - JWT-based authorization for protected routes (create, read, update complaints)
