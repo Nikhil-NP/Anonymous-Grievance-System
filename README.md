@@ -72,7 +72,7 @@ ATLAS_URI=your-mongodb-atlas-uri
 mygmail=your-gmail-for-smtp
 PORT=5000
 appPasswordGoogle=your-google-app-password
-ACCESS_TOKEN_SECRET=your-jwt-secret
+ACCESS_TOKEN_SECRET=your-jwt-secret{Any secret key that is used for authorisation purposes eg.., 1234}
 ```
 
 4. Running the Application
