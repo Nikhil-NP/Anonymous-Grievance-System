@@ -107,7 +107,7 @@ Contributions are welcome! To contribute:
 - Lead Developer: Nikhil: https://github.com/Nikhil-NP
 - Contributors:
   - Naveen L D : https://github.com/naveen-dinesh
-  - Shivanaga: [GitHub Profile]
+  - Shivanaga: https://github.com/Shivanaga7sheelavantar
   - Veeresh: [GitHub Profile]
 
 ## Acknowledgments
