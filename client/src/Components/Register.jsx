@@ -17,7 +17,7 @@ const Register = () => {
       setError('All fields are required');
       return;
     }
-
+    //college mail validation to ensure that no random mail accepted
     const regex = /^[A-Za-z]+\.[0-9]{4}[A-Za-z0-9]+@atmemys\.onmicrosoft\.com$/;
     if (!regex.test(formData.email)) {
       setError('Invalid student email format');

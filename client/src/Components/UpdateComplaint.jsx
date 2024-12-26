@@ -17,7 +17,7 @@ const UpdateComplaint = () => {
   useEffect(() => {
     const fetchComplaint = async () => {
       try {
-        const response = await fetchComplaintById(_id, token);
+        const response = await fetchComplaintById(_id, token);//get the id of comlaint
         const complaintData = response.data;
         setComplaint(complaintData);
         setStatus(complaintData.status);

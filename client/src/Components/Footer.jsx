@@ -5,7 +5,7 @@ import './Layout.css'; // footer styles from layer , decided to keep all the foo
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>&copy; 2024 Anonymous Grivence System,B1 batch ATME</p>
+      <p>&copy; 2024 Anonymous Grivence System,B1 batch,5th Sem CSE, ATME</p>
     </footer>
   );
 };

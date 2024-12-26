@@ -31,6 +31,7 @@ const CreateComplaint = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //this seems redundant as we are doing that in backend but less backend calls but i agree this can make this slow
     if (!title || !description || !facultyId) {
       setError("All fields are required.");
       return;
