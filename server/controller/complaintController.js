@@ -185,7 +185,9 @@ const getRejectedComplaints = asyncHandler(async (req, res) => {
 });
 
 
-// Assuming you're using Express.js
+// @desc Get complaint by Id
+// @route GET /api/:id
+// @access Private 
 const getComplaintById = asyncHandler(async (req, res) => {
    
       const complaint = await Complaints.findById(req.params.id);
@@ -200,9 +202,9 @@ const getComplaintById = asyncHandler(async (req, res) => {
   
 // @desc Get all faculty members
 // @route GET /api/faculty
-// @access Private (Optional, based on role)
+// @access Private 
 const getAllFaculty = asyncHandler(async (req, res) => {
-    // If you want to restrict to certain roles, add checks
+    //currently only student can send complaint to faculty hense made it only for students
     if (req.user.role !== 'student') {
         res.status(403);
         throw new Error('Access denied only student can see .');

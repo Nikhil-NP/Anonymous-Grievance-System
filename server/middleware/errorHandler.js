@@ -1,4 +1,5 @@
-//the error hadler only middleware that takes 5 args hense easy to route whenever error detected its passed here
+//the error hadler  middleware is the only middleware that  takes 5 args,hense we know for certian this is error handler,
+//  hense easy to route whenever error detected its passed here
 const {constants} = require("../constants");
 const errorHandler = (err,req,res,next) =>{
     //res.json({message: err.message,stacktrace: err.stack });

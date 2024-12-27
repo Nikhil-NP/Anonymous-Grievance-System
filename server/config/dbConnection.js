@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-
+//setting up atlas cloud db ,its a free clustor 
 const connectDb = async () =>{
     try {
         const connect = await mongoose.connect(process.env.CONNECTION_STRING);

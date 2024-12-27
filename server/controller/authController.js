@@ -55,7 +55,7 @@ const registerStudent = asyncHandler( async (req, res) => {
 
 
     //regex email validator to ensure the mail is in valid format
-    //my mail for example : NikhilKumarPurohit.2022CMCIM400@atmemys.onmicrosoft.com  (fake)
+    //my mail for example : NikhilKumarPurohit.2022CMCIM400@atmemys.onmicrosoft.com  (fake ,lol if you tried)
     const regex = /^[A-Za-z]+\.[0-9]{4}[A-Za-z0-9]+@atmemys\.onmicrosoft\.com$/;
     if (!regex.test(email)){
         res.status(400)
@@ -78,7 +78,7 @@ const registerStudent = asyncHandler( async (req, res) => {
         from: process.env.mygmail,
         to: email,
         subject: 'Verify Your Email',
-        text: `Your OTP is ${otp}. It is valid for 5 minutes.B1 batch CSE ATME`
+        text: `Your OTP is ${otp}. It is valid for 5 minutes(B1 batch CSE ATME)`
     };
 
     try {
@@ -167,7 +167,7 @@ const loginStudent =  asyncHandler(async (req, res) => {
 
     const user = await Student.findOne({ username });
 
-    //since we cant validate via mail we need to do via username
+    //since we cant validate via mail we need to do via username and password
     if (user && (await bcrypt.compare(password, user.password))) {
         res.status(200);
         res.json({

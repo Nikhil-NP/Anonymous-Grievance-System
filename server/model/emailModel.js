@@ -9,7 +9,8 @@ const emailSchema = new mongoose.Schema({
       required: true,
       unique: true,
     },
-  }, { timestamps: true });
+  }, { timestamps: true });//remove the timestamp  i kept it as i am testing the code
+
   
   module.exports  = mongoose.model('Email', emailSchema);
   

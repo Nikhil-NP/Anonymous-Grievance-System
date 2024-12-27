@@ -26,8 +26,8 @@ app.use(express.urlencoded({ extended: false })); //parses the HTML to extract j
 
 //body parser for email format verifier
 const bodyParser = require('body-parser');
-app.use(bodyParser.json())
-app.use(cors());
+app.use(bodyParser.json())//for regex form validation
+app.use(cors());//semeless communication between client and server
 
 
 
