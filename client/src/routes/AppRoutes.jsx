@@ -35,7 +35,7 @@ const AppRoutes = () => (
     <Route path="/rejected" element={<ProtectedRoute><RejectedComplaints /></ProtectedRoute>}/>
     <Route path="/history" element={<ProtectedRoute><ComplaintsHistory /></ProtectedRoute>}/>
 
-    {/* Student Protected Routes */}
+    {/* faculty Protected Routes */}
     <Route path="/facultydashboard" element={ <ProtectedRoute> <FacultyDashboard />  </ProtectedRoute>}/>
     <Route path="/pending" element={ <ProtectedRoute> <PendingComplaints />  </ProtectedRoute>}/>
     <Route path="/pending/:id" element={<ProtectedRoute><UpdateComplaint /></ProtectedRoute>} />
