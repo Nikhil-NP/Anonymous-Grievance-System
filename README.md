@@ -69,7 +69,7 @@ npm install
 Create a `.env` file in the server directory with the following variables:
 ```
 GEMINI=your-gemini-api-key
-ATLAS_URI=your-mongodb-atlas-uri
+CONNECTION_STRING=your-mongodb-atlas-uri
 mygmail=your-gmail-for-smtp
 PORT=5000
 appPasswordGoogle=your-google-app-password
